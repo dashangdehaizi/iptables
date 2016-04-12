@@ -1,2 +1,5 @@
-/sbin/iptables -t nat -A PREROUTING -d 118.194.242.178 -j DNAT --to-destination 10.1.1.191
-/sbin/iptables -t nat -A POSTROUTING -s 10.1.1.191 -o eth0 -j SNAT --to-source 106.37.185.139
+/sbin/iptables -t nat -A PREROUTING -d *.*.*.*  -j DNAT --to-destination *.*.*.*
+/sbin/iptables -t nat -A POSTROUTING -s *.*.*.*  -o eth0 -j SNAT --to-source *.*.*.*
+
+
+/sbin/iptables -t nat -A PREROUTING -s *.*.*.*/32 -i em2 -p tcp -m tcp --dport 59208 -j DNAT --to-destination *.*.*.*:14000
